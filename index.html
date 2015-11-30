@@ -2,34 +2,50 @@
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
 <!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]-->
 <!--[if IE 8]><html class="no-js lt-ie9"><![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" ng-app="NameGameApp"><!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-
+<!--
         <link rel="stylesheet" href="styles/bootstrap.css">
-        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/main.css"> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+        <script src="scripts/vendor/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
         <script src="scripts/vendor/modernizr.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.min.js"></script>
+        <script src="scripts/namegame.js"></script>
     </head>
-    <body id="index-page">
+    <body ng-controller="MainCtrl">
         <div class="container">
-            <div class="hero-unit">
-                <h1>Wotcha!</h1>
-                <p>You now have</p>
-                <ul>
-                    <li>HTML5 Boilerplate</li>
-                    <li>Twitter Bootstrap</li>
-                </ul>
-                <p>installed.</p>
-                <h3>Enjoy coding!</h3>
+            <button class="btn" ng-click="board('easy')">5 Teammates</button>
+            <button class="btn" ng-click="board('medium')">10 Teammates</button>
+            <button class="btn" ng-click="board('hard')">15 Teammates</button>
+            <div class="row">
+                <div ng-repeat="teammate in teammates">
+                    <!-- on click show name -->
+                    <a href class="col s2" ng-click="showName = !showName">
+                        <img ng-hide="showName" ng-src="https://media.glassdoor.com/sqll/512911/willowtree-apps-squarelogo-1416581392567.png"/>
+                        <div ng-show="showName" style="height:200px;width:200px;border:4px solid {{teammate['color']}};"><p class="center">{{teammate.name}}</p></div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div ng-repeat="mate in teammates">
+                    <a href class="col s2" ng-click="showPic = !showPic">
+                        <!-- on click show pic -->
+                        <img ng-hide="showPic" ng-src="https://media.glassdoor.com/sqll/512911/willowtree-apps-squarelogo-1416581392567.png"/>
+                        <img ng-show="showPic" ng-src="{{mate.url}}" style="height:200px;width:200px;border:4px solid {{mate['color']}};"/>
+                    </a>
+                </div>
             </div>
         </div>
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="scripts/vendor/jquery.min.js"><\/script>')</script>
-        <script src="/scripts/main.js"></script>
     </body>
 </html>
